@@ -1,0 +1,15 @@
+🎯 Goal
+Create a home service marketplace with these features:
+
+🧍User can be a Homeowner (who posts service requests) or a Provider (who sends quotes).
+
+🔧 Service requests like Plumbing, Electrical, etc. are posted by homeowners.
+
+📝 Providers send quotes for those requests.
+
+✅ Homeowner accepts one quote, which becomes a Job.
+
+💰 Job is tracked and marked complete, then payment is made.
+
+⭐ Rating is given after job.
+
