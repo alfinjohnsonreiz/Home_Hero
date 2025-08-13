@@ -36,6 +36,9 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import PersonIcon from "@mui/icons-material/Person";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import ChatIcon from "@mui/icons-material/Chat";
+import { Tooltip } from "@mui/material";
+import ChatWidget from "../../Chat/ChatWidget";
 
 // const statusIconMap: Record<string, React.ReactNode> = {
 //   completed: <CheckCircleIcon color="success" />,
@@ -46,7 +49,7 @@ const JobList = () => {
   //! Role
   const userString: any = localStorage.getItem("authUser");
   const user: any = JSON.parse(userString);
-  const { role } = user || {};
+  const { role ,name} = user || {};
 
   const [jobs, setJobs] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -154,7 +157,7 @@ const JobList = () => {
           const rzp = new (window as any).Razorpay(options);
           rzp.open();
 
-           const markResponse = await markPaid(jobId);
+          const markResponse = await markPaid(jobId);
           if (markResponse.data.success) {
             setJobs((prevJobs: any) =>
               prevJobs.map((job: any) =>
@@ -197,6 +200,11 @@ const JobList = () => {
 
   const handleExpandClick = (jobId: any) => {
     setExpandedJob(expandedJob === jobId ? null : jobId);
+  };
+
+  const [chatJobId, setChatJobId] = useState<number | null>(null);
+  const handleOpenChat = (jobId: number) => {
+    setChatJobId(jobId);
   };
   if (loading)
     return (
@@ -280,7 +288,6 @@ const JobList = () => {
                           {toTitleCase(job.servicerequest?.title) ||
                             "Untitled Request"}
                         </Typography>
-
                         {job.servicerequest?.urgent && (
                           <Chip
                             icon={<PriorityHighIcon />}
@@ -298,6 +305,23 @@ const JobList = () => {
                             size="small"
                           />
                         )}
+                        <Stack p={1}>
+                          <IconButton
+                            color="primary"
+                            sx={{
+                              bgcolor: "#e8f5fe", // Light blue background
+                              "&:hover": {
+                                bgcolor: "#d0e3fc", // Darker on hover
+                                transform: "scale(1.1)",
+                              },
+                              transition: "all 0.2s ease",
+                            }}
+                            onClick={() => handleOpenChat(job.j_id)}
+                          >
+                            <ChatIcon fontSize="medium" />
+                          </IconButton>
+                        </Stack>
+
                         <IconButton
                           onClick={() => handleExpandClick(job.j_id)}
                           size="small"
@@ -464,7 +488,7 @@ const JobList = () => {
                                   handleOpenConfirmPayment(job.j_id)
                                 }
                               >
-                               Pay ${job.price}
+                                Pay ${job.price}
                               </Button>
                             </>
                           )}
@@ -581,6 +605,7 @@ const JobList = () => {
           </Grid>
         </Box>
       )}
+
       <ConfirmDialog
         animationJob={showJobAnimation}
         open={confirmdialogopen}
@@ -601,6 +626,10 @@ const JobList = () => {
         confirmText="Yes, go ahead"
         cancelText="No, cancel"
       />
+      {chatJobId && (
+        <ChatWidget jobId={chatJobId} onClose={() => setChatJobId(null)}  username={name} role={role} visible={!!chatJobId}
+/>
+      )}
     </Box>
   );
 };

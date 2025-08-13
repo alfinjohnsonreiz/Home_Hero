@@ -48,7 +48,7 @@ const Profile = (props: Props) => {
   }
 
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
+    <Container maxWidth="md" sx={{ py: 4 ,minHeight:"95dvh"}}>
       <Paper elevation={3} sx={{ 
         p: 4, 
         borderRadius: 4,

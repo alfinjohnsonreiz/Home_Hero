@@ -23,7 +23,11 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { ServiceReqContext } from "./structure/serviceReq/ServiceReqProvider";
 import { useNavigate } from "react-router-dom";
 import RateReviewIcon from "@mui/icons-material/RateReview";
-
+import {
+  Logout, // Default logout icon (→)
+  ExitToApp, // Alternative (⬆→)
+  PowerSettingsNew, // Power symbol (⏻)
+} from "@mui/icons-material";
 const drawerWidth = 280;
 
 interface NavBarProps {
@@ -105,9 +109,9 @@ const NavbarHomeowner: React.FC<NavBarProps> = ({ role }) => {
         "& .MuiDrawer-paper": {
           width: drawerWidth,
           boxSizing: "border-box",
-            background:"linear-gradient(90deg, #00425f, #0096c7)",
+          background: "linear-gradient(90deg, #00425f, #0096c7)",
           // background: "linear-gradient(90deg, #131fa8, #c75cf4)",
-        // background: "linear-gradient(135deg,rgb(119, 86, 172) 0%, #d65db1 100%)",
+          // background: "linear-gradient(135deg,rgb(119, 86, 172) 0%, #d65db1 100%)",
           borderRadius: "2px",
         },
       }}
@@ -154,9 +158,32 @@ const NavbarHomeowner: React.FC<NavBarProps> = ({ role }) => {
       <Box sx={{ p: 2 }}>
         <Button
           variant="outlined"
-          startIcon={<LogoutIcon />}
+          startIcon={<PowerSettingsNew sx={{ color: "#9d4400" }} />}
           fullWidth
-          color="error"
+          sx={{
+            background: "#e6f4f1",
+            color: "#9d4400",
+            borderColor: "#9d4400",
+            borderRadius: "8px",
+            py: 1.5,
+            textTransform: "none",
+            fontSize: "16px",
+            fontWeight: 500,
+            transition: "all 0.3s ease",
+            "&:hover": {
+              background: "#9d4400",
+              color: "#fff",
+              borderColor: "#9d4400",
+              boxShadow: "0 4px 12px rgba(157, 68, 0, 0.2)",
+              transform: "translateY(-1px)",
+              "& .MuiSvgIcon-root": {
+                color: "#fff", // Ensures icon color changes on hover
+              },
+            },
+            "&:active": {
+              transform: "translateY(0)",
+            },
+          }}
           onClick={() => {
             localStorage.clear();
             navigate("/login");
