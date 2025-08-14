@@ -14,7 +14,7 @@ const ChatWidget = forwardRef(
   ({ jobId, onClose, username, role }: Props, ref) => {
     const nodeRef = React.useRef<HTMLDivElement>(null);
 
-    const [Chats, setChats] = useState([]);
+    const [Chats, setChats] = useState<any[]>([]);
     const [message, setMessage] = useState("");
     useEffect(() => {
       socket.emit("join_job", { jobId: jobId.toString()  });
