@@ -68,10 +68,10 @@ const CreateServiceReq = ({ role }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (
-      !formData.title ||
-      !formData.description ||
-      !formData.category ||
-      !formData.location
+      !formData.title.trim() ||
+      !formData.description.trim() ||
+      !formData.category.trim() ||
+      !formData.location.trim()
     ) {
       toast.error("All field are required");
       setError("All fields are required.");
@@ -126,15 +126,14 @@ const CreateServiceReq = ({ role }) => {
       open={isServiceReqOpen}
       maxWidth="sm"
       onClose={closeServiceReqModal}
-      
       fullWidth
-      sx={{            background:"linear-gradient(90deg,rgba(0, 67, 95, 0.4),rgba(0, 149, 199, 0.47))",
-}}
+      sx={{
+        background:
+          "linear-gradient(90deg,rgba(0, 67, 95, 0.4),rgba(0, 149, 199, 0.47))",
+      }}
     >
       <DialogTitle>Create Service Request</DialogTitle>
-      <DialogContent
-        dividers
-      >
+      <DialogContent dividers>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
           <Grid container spacing={2}>
             <Grid size={{ xs: 12 }}>

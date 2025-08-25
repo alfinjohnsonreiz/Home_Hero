@@ -20,6 +20,7 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
+  "http://localhost:5175",
 ];
 //! Socket io set up
 const server = http.createServer(app);
@@ -34,7 +35,7 @@ const io = new Server(server, {
         callback(new Error("Not allowed by CORS"));
       }
     },
-    credentials: true,
+    credentials: false,
   },
 });
 

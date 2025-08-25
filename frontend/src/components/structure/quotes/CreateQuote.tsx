@@ -18,19 +18,18 @@ import { toast } from "react-toastify";
 //                   serviceReqId={serviceReqId}
 //                   handleClose={handleCloseAddQuote}
 //                   handleOpen={handleOpenAddQuote}
-interface formDataType{
-  price:string,
-  startDate:string,
-  endDate:string,
-  message:string
+interface formDataType {
+  price: string;
+  startDate: string;
+  endDate: string;
+  message: string;
 }
-interface CreateProps{
-  role:string,
-  open:boolean,
-  handleClose:()=>void,
-  handleOpen:(serviceReqId:number)=>void,
-  addHandleSubmit:(formData:formDataType)=>void,
-
+interface CreateProps {
+  role: string;
+  open: boolean;
+  handleClose: () => void;
+  handleOpen: (serviceReqId: number) => void;
+  addHandleSubmit: (formData: formDataType) => void;
 }
 
 const CreateQuote = ({
@@ -57,10 +56,10 @@ const CreateQuote = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (
-      !formData.price ||
-      !formData.message ||
-      !formData.startDate ||
-      !formData.endDate
+      !formData.price.trim() ||
+      !formData.message.trim() ||
+      !formData.startDate.trim() ||
+      !formData.endDate.trim()
     ) {
       toast.error("All fields are required.");
       return;
@@ -74,7 +73,6 @@ const CreateQuote = ({
       endDate: "",
       message: "",
     });
-    
   };
   const handleCloseAndReset = () => {
     resetForm();
@@ -141,7 +139,6 @@ const CreateQuote = ({
                   onChange={handleChange}
                 />
               </Grid>
-
 
               <Grid size={{ xs: 12 }}>
                 <Button type="submit" variant="contained" fullWidth>

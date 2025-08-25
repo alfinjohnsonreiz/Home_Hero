@@ -13,3 +13,23 @@ Create a home service marketplace with these features:
 
 ⭐ Rating is given after job.
 
+
+
+Your flow:
+Homeowner logs in
+
+Can create service requests.
+
+Can see only their own service requests.
+
+Can see quotes only related to their own service requests.
+
+Provider logs in
+
+Can see all service requests from all homeowners (to pick jobs to quote on).
+
+Can add quotes to any service request.
+
+Can see only their own quotes (quotes they created).
+
+
